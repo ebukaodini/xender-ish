@@ -2,7 +2,7 @@
 # All deploys from the main repository branch
 # will inherit these settings.
 [context.production]
-  command = "make production"
+  command = "npm run build"
   [context.production.environment]
     ACCESS_TOKEN = "super secret"
   # Deploys from main branch run this plugin in the build.
