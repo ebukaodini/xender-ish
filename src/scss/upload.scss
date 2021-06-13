@@ -1,0 +1,640 @@
+@import "base";
+
+section.upload_page {
+
+  width: 100%;
+  height: 100%;
+
+  input.hidden_upload_field {
+    display: none;
+  }
+
+  div.new_upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    button.add_new_file {
+      border: none;
+      background-color: inherit;
+
+      svg {
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        background-color: $active-color;
+        color: $white-color;
+
+        &:hover {
+          background-color: rgba($active-color, 0.8);
+          color: $white-color;
+        }
+      }
+    }
+
+    label.upload_instructions {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+      color: $grey-color;
+      font-size: $normal-fontsize;
+    }
+  }
+
+  div.adding_files {
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    $transfer-height: 80px;
+    $upload-padding: 10px;
+
+    div.uploaded_files_details {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: calc(100% - 100px - 20px);
+      width: calc(100% - 20px);
+      padding: $upload-padding;
+      margin-right: -2px;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: $light-color;
+        border-radius: 10px;
+        &:hover {
+          background: $grey-color;
+        }
+      }
+
+      ul.uploaded_files {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        list-style: none;
+        margin-bottom: 10px;
+
+        hr {
+          border: none;
+          padding: 0.5px;
+          background-color: $grey-color;
+        }
+
+        li {
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          width: 100%;
+          margin: 10px 0px;
+
+          div.file_size_and_icon {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            span.file_size {
+              font-size: $small-fontsize;
+              color: $grey-color;
+            }
+            span.file_icon {
+              margin-left: 5px;
+              svg {
+                cursor: pointer;
+                color: $active-color;
+              }
+            }
+          }
+
+          div.file_name {
+            font-size: $normal-fontsize;
+            color: $dark-color;
+            width: 100%;
+            // width: calc(300px - 59px);
+            overflow: clip;
+            text-overflow: ellipsis;
+            line-break: anywhere;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+
+          button.remove_file {
+            border: none;
+            background-color: inherit;
+
+            svg {
+              cursor: pointer;
+              padding: 2px;
+              border-radius: 50%;
+              background-color: $light-color;
+              color: $grey-color;
+
+              &:hover {
+                background-color: rgba($danger-color, 0.8);
+                color: $white-color;
+              }
+            }
+          }
+        }
+      }
+
+      div.add_files {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 10px;
+
+        button {
+          border: none;
+          background-color: inherit;
+
+          svg {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: $active-color;
+            color: $white-color;
+
+            &:hover {
+              background-color: rgba($active-color, 0.8);
+              color: $white-color;
+            }
+
+            &.disabled {
+              background-color: $grey-color;
+              color: $light-color;
+            }
+          }
+        }
+
+        div.upload_instructions > label {
+          margin-left: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          color: $grey-color;
+          font-size: $normal-fontsize;
+          cursor: pointer;
+        }
+      }
+    }
+
+    div.status_bar {
+      position: absolute;
+      overflow: hidden;
+      left: 0;
+      bottom: 0;
+      height: $transfer-height;
+      width: calc(100% - 20px);
+      padding: $upload-padding;
+      box-shadow: 0px 0px 5px 1px $grey-color;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      div.filesize_progress_bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        div.filesize_progress_label {
+          color: $dark-color;
+          font-size: $small-fontsize;
+        }
+
+        div.progress_bar {
+          margin-right: 10px;
+          width: 100%;
+          height: 20px;
+          background-color: $light-color;
+          border-radius: 25px;
+          position: relative;
+          overflow: hidden;
+
+          div.progress_indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 20px;
+            background-color: #ff4500;
+            background-color: $active-color;
+          }
+
+          div.progress_percentage {
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 20px;
+            width: 100%;
+            color: $dark-color;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+          }
+        }
+      }
+
+      div.error_msg {
+        color: $danger-color;
+      }
+
+      div.status_footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        span.no_files {
+          color: $dark-color;
+          font-size: $large-fontsize;
+        }
+
+        button {
+          margin: 0px;
+          border: none;
+          background-color: inherit;
+
+          svg {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: $active-color;
+            color: $white-color;
+
+            &:hover {
+              background-color: rgba($active-color, 0.8);
+              color: $white-color;
+            }
+
+            &.disabled {
+              background-color: $grey-color;
+              color: $light-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  div.meta_info {
+    height: 100%;
+    width: 100%;
+    position: relative;
+
+    $transfer-height: 80px;
+    $upload-padding: 10px;
+
+    div.meta_form {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: calc(100% - 100px - 20px);
+      width: calc(100% - 20px);
+      padding: $upload-padding;
+      margin-right: -2px;
+      overflow-x: hidden;
+      overflow-y: auto;
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+      }
+
+      /* Handle */
+      &::-webkit-scrollbar-thumb {
+        background: $light-color;
+        border-radius: 10px;
+        &:hover {
+          background: $grey-color;
+        }
+      }
+
+      div.meta_fields {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-bottom: 10px;
+
+        hr {
+          border: none;
+          padding: 0.5px;
+          background-color: $grey-color;
+        }
+
+        div.sender,
+        div.recipient,
+        div.message,
+        div.verify_email {
+          margin: 5px 0px;
+        }
+
+        small.note {
+          color: $grey-color;
+        }
+
+        input.sender,
+        input.recipient,
+        textarea.message,
+        input.verify_email {
+          padding: 5px;
+          font-size: $normal-fontsize;
+          border: none;
+          border-bottom: $grey-color 1px solid;
+          height: 16px;
+          width: calc(100% - 10px);
+          max-width: 100%;
+        }
+
+        div.recipient > ul.recipientlist > li {
+          display: flex;
+          list-style: none;
+          font-size: $small-fontsize;
+          color: $grey-color;
+          background-color: $light-color;
+          border-radius: 15px;
+          padding: 3px 10px;
+          width: max-content;
+          margin-bottom: 3px;
+          &.disabled {
+            text-decoration: line-through;
+          }
+
+          span > svg {
+            cursor: pointer;
+            margin-left: 5px;
+            margin-top: 1px;
+            &:hover {
+              color: $danger-color;
+            }
+          }
+        }
+
+        div.downloadlink {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: $small-fontsize;
+          color: $grey-color;
+
+          div.downloadlink_checkbox {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            svg {
+              // padding-top: 5px;
+              margin-right: 10px;
+              &.active {
+                color: $active-color;
+              }
+            }
+          }
+
+          svg {
+            cursor: pointer;
+            &.active {
+              color: $active-color;
+            }
+          }
+        }
+
+        textarea.message {
+          resize: none;
+          height: 40px;
+          /* width */
+          &::-webkit-scrollbar {
+            width: 7px;
+            height: 7px;
+          }
+
+          /* Handle */
+          &::-webkit-scrollbar-thumb {
+            background: $light-color;
+            border-radius: 10px;
+            &:hover {
+              background: $grey-color;
+            }
+          }
+        }
+
+        div.note {
+          font-style: italic;
+          color: $grey-color;
+          font-size: $small-fontsize;
+          span:first-child {
+            color: $dark-color;
+          }
+        }
+
+        div.verify_email > form {
+          label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            button[type="button"] {
+              display: flex;
+              align-items: center;
+              cursor: pointer;
+              border: none;
+              background-color: $active-color;
+              font-size: $small-fontsize;
+              padding: 5px 10px;
+              margin: 3px 0px;
+              border-radius: 15px;
+              color: $white-color;
+              svg {
+                margin-top: 2px;
+              }
+              &:hover {
+                background-color: rgba($active-color, 0.8);
+              }
+            }
+          }
+
+          div.isverified {
+            padding: 10px 25px;
+            margin: 10px 0px;
+            border-radius: 25px;
+            color: $grey-color;
+            background-color: $light-color;
+            font-size: $small-fontsize;
+            svg {
+              color: $active-color;
+              margin-right: 5px;
+            }
+          }
+
+          button[type="submit"] {
+            padding: 10px;
+            margin: 10px 0px;
+            width: 100%;
+            cursor: pointer;
+            border: none;
+            background-color: $active-color;
+            border-radius: 25px;
+            font-size: $normal-fontsize;
+            color: $white-color;
+            &:hover {
+              background-color: rgba($active-color, 0.8);
+            }
+            &.disabled {
+              background-color: $grey-color;
+              // color: $light-color;
+            }
+          }
+        }
+      }
+    }
+
+    div.status_bar {
+      position: absolute;
+      overflow: hidden;
+      left: 0;
+      bottom: 0;
+      height: $transfer-height;
+      width: calc(100% - 20px);
+      padding: $upload-padding;
+      box-shadow: 0px 0px 5px 1px $grey-color;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+
+      div.error_msg > small {
+        color: $danger-color;
+      }
+
+      div.status_footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          margin: 0px;
+          border: none;
+          background-color: inherit;
+
+          &.send_btn {
+            width: 80%;
+            padding: 10px;
+            border-radius: 25px;
+            background-color: $active-color;
+            color: $white-color;
+            font-size: $normal-fontsize;
+            cursor: pointer;
+
+            &:hover {
+              background-color: rgba($active-color, 0.8);
+              color: $white-color;
+            }
+
+            &.disabled {
+              background-color: $grey-color;
+              color: $light-color;
+            }
+          }
+
+          svg {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50%;
+            background-color: $active-color;
+            color: $white-color;
+
+            &:hover {
+              background-color: rgba($active-color, 0.8);
+              color: $white-color;
+            }
+
+            &.disabled {
+              background-color: $grey-color;
+              color: $light-color;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  div.uploading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+
+    span.progress {
+      font-size: $xlarge-fontsize;
+      margin-top: -20px;
+    }
+
+    div {
+      cursor: pointer;
+      margin-top: 10px;
+      color: $grey-color;
+      font-size: $large-fontsize;
+
+      span.loading {
+        svg {
+          margin-bottom: -4px;
+          animation: rotation 2s infinite linear;
+          @keyframes rotation {
+            from {
+              transform: rotate(0deg);
+            }
+            to {
+              transform: rotate(360deg);
+            }
+          }
+        }
+      }
+      span.sent {
+        svg {
+          margin-bottom: -4px;
+          color: $active-color;
+        }
+      }
+    }
+
+    div.sent_notice {
+      button {
+        margin: 0px;
+        border: none;
+        // background-color: inherit;
+
+        &.send_again {
+          width: max-content;
+          padding: 10px 15px;
+          border-radius: 25px;
+          background-color: $active-color;
+          color: $white-color;
+          font-size: $normal-fontsize;
+          cursor: pointer;
+
+          &:hover {
+            background-color: rgba($active-color, 0.8);
+            color: $white-color;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+@import 'base';
+
+.header {
+  height: 54px;
+  padding: 0px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: $grey-color solid 1px;
+
+  .page_specific_buttons {
+    button {
+      margin: 0px 10px;
+      cursor: pointer;
+      padding: 7px 7px;
+      border-radius: 50%;
+      border: $grey-color 1px solid;
+      background-color: $light-color;
+      color: $dark-color;
+
+      &:hover {
+        border: $active-color 1px solid;
+        background-color: $active-color;
+        color: $white-color;
+      }
+    }
+
+    button:first-child {
+      margin: 0px 10px;
+      cursor: pointer;
+      color: $dark-color;
+      background-color: $active-color;
+      color: $white-color;
+      padding: 10px 15px;
+      border-radius: 25px;
+      border: none;
+      transition: transform 0.5s ease-in-out;
+
+      &:hover {
+        box-shadow: 50px, 50px, 50px, 50px, $active-color, inset;
+        transform: translate(3px, 3px);
+      }
+    }
+  }
+
+  .general_buttons {
+    button {
+      margin: 0px 10px;
+      cursor: pointer;
+      color: $dark-color;
+      border: none;
+
+      &:hover {
+        color: $active-color;
+      }
+    }
+  }
+}
