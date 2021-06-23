@@ -5,6 +5,7 @@
   command = "npm run build"
   [context.production.environment]
     ACCESS_TOKEN = "super secret"
+    REACT_APP_BASEURL=https://xender-ish.herokuapp.com
   # Deploys from main branch run this plugin in the build.
   # Plugins context requires double brackets.
   [[context.production.plugins]]
