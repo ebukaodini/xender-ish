@@ -261,6 +261,7 @@ class Upload extends Component {
                 <span>Add your files here</span>
                 <span>OR</span>
                 <span>Drag and drop them here</span>
+                <span>{process.env.REACT_APP_BASEURL}</span>
               </label>
             </div>
           }

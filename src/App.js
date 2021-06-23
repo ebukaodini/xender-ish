@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Documents from './pages/documents';
+import Help from './pages/help';
 import Upload from './pages/upload';
 import Download from './pages/download'
 
@@ -10,7 +10,7 @@ function App() {
         <Route exact path='/' component={Upload} />
         <Route exact path='/upload' component={Upload} />
         <Route exact path='/download' component={Download} />
-        <Route exact path='/help' component={Documents} />
+        <Route exact path='/help' component={Help} />
       </Switch>
     </Router>
   );
